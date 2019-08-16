@@ -27,19 +27,22 @@ export default {
   data() {
     return {
       email: "",
-      password: "",
+      password: ""
     };
   },
   validations: {
     email: { required, email },
     password: { required, minLength: minLength(5) }
   },
-  mixins:[loginUser],
-  methods:{
+  mixins: [loginUser],
+  methods: {
     signIn() {
-      this.login(this.email,this.password).then(res => {
-        this.$router.push('/')
-      })
+      this.login(this.email, this.password).then(user => {
+        console.log(user);
+        this.$root.$emit("logged-in", user.authtoken);
+        this.$root.$emit("isAdmin", user.username);
+        this.$router.push("/");
+      });
     }
   }
 };

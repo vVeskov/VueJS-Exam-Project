@@ -1,20 +1,34 @@
 const login = user => {
     localStorage.setItem('username', user.username);
-    localStorage.setItem('authToken', user.authToken);
+    localStorage.setItem('authtoken', user.authtoken);
+    return user;
 }
 
 export const authService = {
-    computed:{
-        isAuthenticated(){
-            return  localStorage.getItem('authtoken') !== null
+    data(){
+        return{
+            authToken: localStorage.getItem('authtoken'),
+            username: localStorage.getItem('username')
+        }
+    },
+    computed: {
+        isAuthenticated() {
+            let a = this.authToken !== null;
+            return a;
         },
-        isAdmin(){
-            let userIsAdmin = localStorage.getItem('username');
+        isAdmin() {
+            // let userIsAdmin = localStorage.getItem('username');
+            let userIsAdmin = this.username;
             if (userIsAdmin == "Admin") {
                 return true;
             }
             return false;
-        }
+        },
+    },
+    created() {
+        this.$root.$on('logged-in', authtoken => this.authToken = authtoken );
+        this.$root.$on('isAdmin', username => this.username = username );
+
     }
 }
 
@@ -40,11 +54,13 @@ export const loginUser = {
                     email,
                     password
                 }
-            ).then(res => {
-                localStorage.setItem('username', res.data.user.name)
-                localStorage.setItem('authtoken', res.data.token)
-                console.log(res);
-            })
+            ).then(({data}) => login({
+                // localStorage.setItem('username', data.user.name)
+                // localStorage.setItem('authtoken', data.token)
+                
+                username: data.user.name,
+                authtoken: data.token
+            }))
         }
     }
 }

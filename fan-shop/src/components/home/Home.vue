@@ -2,15 +2,15 @@
   <main>
     <h1>Hello username, welcome to our Gift Shop !</h1>
     <section>
-      <div class="single-gift">
+      <div class="single-gift" v-for="gift in gifts" :key="gift._id" >
         <img
-          src="https://www.pascogifts.com/files/cache/square/files/pasco-voetballen-59ae97b38401d.jpg"
+          :src="gift.imageUrl"
           alt="giftImage"
         />
 
-        <span class="gift-name">Gift name</span>
+        <span class="gift-name">{{gift.giftName}}</span>
         <div class="gift-details">
-          <span class="gift-price">Gift Price</span>
+          <span class="gift-price">{{gift.price}}</span>
           <div class="btn-wrapper">
             <template v-if="isAdmin">
               <a class="editButton">Edit</a>
@@ -30,7 +30,11 @@
 </template>
 
 <script>
-export default {};
+import { giftService } from "@/services/giftServices";
+export default {
+  mixins: [giftService],
+  
+};
 </script>
 
 <style scoped>

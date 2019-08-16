@@ -31,7 +31,7 @@
           </li>
         </template>
         <li v-if="isAuthenticated">
-          <a>Logout</a>
+          <a @click="logoutUser()">Logout</a>
         </li>
       </ul>
     </nav>
@@ -39,7 +39,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    logoutUser() {
+      localStorage.clear();
+      this.$router.go();
+      // this.$router.push("/signin");
+    }
+  }
+};
 </script>
 
 <style>
