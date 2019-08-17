@@ -28,7 +28,6 @@ export const authService = {
     created() {
         this.$root.$on('logged-in', authtoken => this.authToken = authtoken );
         this.$root.$on('isAdmin', username => this.username = username );
-
     }
 }
 
@@ -54,10 +53,7 @@ export const loginUser = {
                     email,
                     password
                 }
-            ).then(({data}) => login({
-                // localStorage.setItem('username', data.user.name)
-                // localStorage.setItem('authtoken', data.token)
-                
+            ).then(({data}) => login({    
                 username: data.user.name,
                 authtoken: data.token
             }))

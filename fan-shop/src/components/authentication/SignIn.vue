@@ -38,8 +38,8 @@ export default {
   mixins: [loginUser],
   methods: {
     signIn() {
-      this.login(this.email, this.password).then(user => {
-        console.log(user);
+        this.login(this.email, this.password).then(user => {
+        
         this.$root.$emit("logged-in", user.authtoken);
         this.$root.$emit("isAdmin", user.username);
         this.$router.push("/");

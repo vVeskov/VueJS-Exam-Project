@@ -32,7 +32,7 @@ export default {
     giftName: { required },
     description: { required },
     imageUrl: { required },
-    price: { required },
+    price: { required }
   },
   mixins: [giftService],
   methods: {
@@ -43,7 +43,6 @@ export default {
         this.imageUrl,
         this.price
       ).then(res => {
-        console.log(res);
         this.$router.push("/");
       });
     }
@@ -51,5 +50,40 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+button:disabled {
+  cursor: not-allowed;
+}
+button {
+  max-width: 10%;
+  margin-top: 1rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.create-gift {
+  margin: 1rem 0 0 3rem;
+}
+
+.create-gift form {
+  display: flex;
+  flex-direction: column;
+}
+.create-gift form span,
+.create-gift form input,
+.create-gift form div,
+.create-gift form {
+  margin-bottom: 0.5rem;
+}
+.create-gift span {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.create-gift input {
+  max-width: 30%;
+  font-size: 1.2rem;
+}
+.create-gift div {
+  color: red;
+  font-size: 1.2rem;
+}
 </style>

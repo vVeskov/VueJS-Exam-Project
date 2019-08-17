@@ -174,7 +174,6 @@ module.exports = {
   },
 
   deleteGift: (req, res) => {
-
     let id = req.params.id;
     let query = { '_id': req.params.id };
     Gift.deleteOne(query, function (err) {
@@ -189,10 +188,11 @@ module.exports = {
   },
 
   editGift: (req, res) => {
+   
     let id = req.params.id;
-
     let query = { '_id': id };
-    let newData = req.body;
+    let newData = req.body.dataToSend;
+  
     Gift.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
       if (err) {
         console.log("An error occurred while updating document:")

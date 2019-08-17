@@ -5,6 +5,7 @@ import SignIn from '@/components/authentication/SignIn';
 import SignUp from '@/components/authentication/SignUp';
 import DetailsGift from '@/components/gifts/DetailsGift';
 import CreateGift from '@/components/gifts/CreateGift';
+import EditGift from '@/components/gifts/EditGift';
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/create',
       name: 'createGift',
       component: CreateGift
+    },
+    {
+      path: '/edit/:id',
+      name: 'editGift',
+      component: EditGift
     },
   ]
 })

@@ -10,8 +10,8 @@
           <span class="gift-price">{{gift.price}}</span>
           <div class="btn-wrapper">
             <template v-if="isAdmin">
-              <router-link to="/" class="editButton">Edit</router-link>
-              <button class="deleteButton" type="submit">Delete</button>
+              <router-link :to="{name:'editGift',params:{id:gift._id}}" class="editButton">Edit</router-link>
+              <button @click="deleteGift(gift._id)" class="deleteButton" type="submit">Delete</button>
             </template>
             <template v-else>
               <div class="btn-wrapper">
@@ -35,7 +35,8 @@ import { giftService } from "@/services/giftServices";
 export default {
   data() {
     return {
-      username: ""
+      username: "",
+      
     };
   },
   mixins: [giftService],
@@ -45,10 +46,75 @@ export default {
     if (user !== null) {
       this.username = user;
     }
-    console.log(this.username);
+   
+  },
+  methods:{
+    deleteGift(id){
+      this.deleteHomePageGift(id)
+      this.$router.go()
+    }
   }
 };
 </script>
 
 <style scoped>
+h1 {
+  text-align: center;
+}
+
+main section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+main section .single-gift {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-bottom: 1rem;
+  margin: 3rem 1rem 0 1rem;
+}
+main section img {
+  width: 256px;
+  height: 256px;
+}
+main section .single-gift:hover {
+  box-shadow: 0 0 1rem 0.1rem rgba(0, 0, 0, 0.3);
+}
+.single-gift .gift-details {
+  display: flex;
+  flex-direction: column;
+}
+.gift-name {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #192c40;
+}
+.gift-price {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.btn-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.btn-wrapper a,
+.btn-wrapper button {
+  background: #ffffff;
+  font-size: 1.2rem;
+  color: #212529;
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 0.2rem 0.7rem;
+}
+.btn-wrapper a:hover,
+.btn-wrapper button:hover {
+  background: black;
+  color: white;
+}
 </style>

@@ -44,11 +44,44 @@ export default {
     logoutUser() {
       localStorage.clear();
       this.$router.go();
-      // this.$router.push("/signin");
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+header {
+  background: #1e1e1e;
+}
+
+header h2 {
+  color: #dd0031;
+  margin-left: 1rem;
+}
+
+header nav,
+header nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding-top: 0.5rem;
+}
+
+header nav ul li {
+  list-style-type: none;
+}
+
+header nav ul a {
+  color: whitesmoke;
+  text-decoration: none;
+  list-style: none;
+  margin-right: 1.5rem;
+  font-size: 1.2rem;
+}
+header nav ul a:hover {
+  color: #dd0031;
+  border-bottom: 1px solid #dd0031;
+}
 </style>

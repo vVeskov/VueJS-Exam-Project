@@ -2,7 +2,8 @@ export const giftService = {
     data() {
         return {
             gifts: [],
-            details: []
+            details: [],
+            
         };
     },
     methods: {
@@ -14,21 +15,31 @@ export const giftService = {
                 })
         },
         getDetailsGift(id) {
-            console.log(id);
             return this.$http.get(`feed/gift/details/${id}`).
                 then(({ data }) => {
                     this.details = data.gift;
-
                 })
         },
         create(giftName, description, imageUrl, price) {
 
-            return this.$http.post("feed/gift/create", { 
-                giftName, description, imageUrl, price 
+            return this.$http.post("feed/gift/create", {
+                giftName, description, imageUrl, price
             }
-            ).then((res) => {
-                console.log(res);
+            )
+        },
+        edit(giftName, description, imageUrl, price, id) {
+            let dataToSend = {
+                giftName, description, imageUrl, price
+            }
+            return this.$http.put(`feed/gift/edit/${id}`, {
+                dataToSend
             })
+        },
+        deleteHomePageGift(id){
+            return this.$http.delete(`feed/gift/delete/${id}`).then()
+            
         }
-    }
+
+    },
+    
 }
