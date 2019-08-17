@@ -10,6 +10,8 @@ Vue.use(Vuelidate);
 Vue.use(axiosPlugin);
 
 Vue.mixin(authService)
+
+
 new Vue({
   router,
   render: h => h(App)

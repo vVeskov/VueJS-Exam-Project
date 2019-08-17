@@ -4,34 +4,34 @@
       <h2>Football Fan Shop</h2>
       <ul>
         <li>
-          <a href="/">Home</a>
+          <router-link to="/">Home</router-link>
         </li>
         <template v-if="isAuthenticated && !isAdmin">
           <li>
-            <a href="/myOrders">My Orders</a>
+            <router-link to="/myOrders">My Orders</router-link>
           </li>
           <li>
-            <a href="/gift/cart">Cart</a>
+            <router-link to="/gift/cart">Cart</router-link>
           </li>
         </template>
         <template v-if="!isAuthenticated">
           <li>
-            <a href="/signin">Sign In</a>
+            <router-link to="/signin">Sign In</router-link>
           </li>
           <li>
-            <a href="/signup">Sign Up</a>
+            <router-link to="/signup">Sign Up</router-link>
           </li>
         </template>
         <template v-if="isAdmin">
           <li>
-            <a href="/gift/create">Create Gift</a>
+            <router-link to="/create">Create Gift</router-link>
           </li>
           <li>
-            <a href="/gift/pending">Pending Orders</a>
+            <router-link to="/gift/pending">Pending Orders</router-link>
           </li>
         </template>
         <li v-if="isAuthenticated">
-          <a @click="logoutUser()">Logout</a>
+          <button @click="logoutUser()">Logout</button>
         </li>
       </ul>
     </nav>

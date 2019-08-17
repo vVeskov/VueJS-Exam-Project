@@ -2,15 +2,22 @@
   <div class="details">
     <h1>Details</h1>
     <div class="details-img">
-      <img src="" />
+      <img :src="details.imageUrl" />
     </div>
-    <p class="product-description">gift.description</p>
-    <a class="continue-shopping1">Back to menu</a>
+    <p class="product-description">{{details.description}}</p>
+    <router-link to="/" class="continue-shopping1">Back to menu</router-link>
   </div>
 </template>
 
 <script>
-export default {};
+import { giftService } from "@/services/giftServices";
+
+export default {
+  mixins: [giftService],
+  created(){
+    this.getDetailsGift(this.$route.params.id);
+  }
+};
 </script>
 
 <style>
