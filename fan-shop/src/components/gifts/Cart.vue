@@ -32,7 +32,8 @@
     </div>
     <div class="cart-buttons">
       <router-link to="/" v-if="userGifts.length" class="continue-shoping">Continue shoping</router-link>
-      <button v-if="userGifts.length"
+      <button
+        v-if="userGifts.length"
         @click="removeUserCartAndAddPendingOrders(userGifts,totalSum)"
         type="submit"
         class="buy-product"
@@ -79,9 +80,8 @@ export default {
         user: user
       };
       this.addPendingOrders(dataToSend);
-      this.removeUserOrders(user).then(this.$router.push('/'));
-    },
-
+      this.removeUserOrders(user).then(this.$router.push("/"));
+    }
   },
   mixins: [giftService],
   created() {
@@ -135,6 +135,10 @@ export default {
 </script>
 
 <style scoped>
+.user-sum,
+.cart-buttons {
+  padding-left: 4rem;
+}
 .cart {
   display: flex;
   flex-direction: column;
@@ -199,5 +203,17 @@ main {
 .buy-product:hover {
   background: #eaeaea;
   color: #f80000;
+}
+.noCartPage {
+  margin-left: 4rem;
+}
+.backBtn {
+  margin-top: 2rem;
+  text-decoration: none;
+  color: red;
+  font-size: 1.5rem;
+}
+.backBtn:hover {
+  color: green;
 }
 </style>

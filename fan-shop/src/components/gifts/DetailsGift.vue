@@ -21,4 +21,23 @@ export default {
 </script>
 
 <style>
+.details{
+  margin-left: 10rem;
+  display: flex;
+  flex-direction: column;
+}
+.product-description{
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.details a {
+  margin-top:2rem;
+  text-decoration: none;
+  color:red;
+  font-size: 1.5rem;
+}
+.details a:hover{
+  color:green;
+}
+
 </style>

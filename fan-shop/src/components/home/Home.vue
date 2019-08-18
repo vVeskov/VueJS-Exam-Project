@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h2 v-if="username">Hello {{username}}, welcome to our Fan Shop !</h2>
+    <h1 v-if="username">Hello {{username}}, welcome to our Fan Shop !</h1>
     <section>
       <div class="single-gift" v-for="gift in gifts" :key="gift._id">
         <img :src="gift.imageUrl" alt="giftImage" />
@@ -14,7 +14,7 @@
               <button @click="deleteGift(gift._id)" class="deleteButton" type="submit">Delete</button>
             </template>
             <template v-else>
-              <div class="btn-wrapper">
+              <div class="btn-wrapper2">
                 <router-link :to="{name:'orderGift',params:{id:gift._id}}" class="orderBtn1">Order</router-link>
                 <router-link
                   :to="{name:'detailsGift',params: {id:gift._id}}"
@@ -35,8 +35,7 @@ import { giftService } from "@/services/giftServices";
 export default {
   data() {
     return {
-      username: "",
-      
+      username: ""
     };
   },
   mixins: [giftService],
@@ -46,12 +45,11 @@ export default {
     if (user !== null) {
       this.username = user;
     }
-   
   },
-  methods:{
-    deleteGift(id){
-      this.deleteHomePageGift(id)
-      this.$router.go()
+  methods: {
+    deleteGift(id) {
+      this.deleteHomePageGift(id);
+      this.$router.go();
     }
   }
 };
@@ -99,12 +97,18 @@ main section .single-gift:hover {
   font-size: 1rem;
   margin-bottom: 1rem;
 }
-.btn-wrapper {
+.btn-wrapper2{
+  width: 100%;
+}
+.btn-wrapper,
+.btn-wrapper2 {
   display: flex;
   justify-content: space-around;
 }
 .btn-wrapper a,
-.btn-wrapper button {
+.btn-wrapper button,
+.btn-wrapper2 a,
+.btn-wrapper2 button {
   background: #ffffff;
   font-size: 1.2rem;
   color: #212529;
@@ -113,7 +117,9 @@ main section .single-gift:hover {
   padding: 0.2rem 0.7rem;
 }
 .btn-wrapper a:hover,
-.btn-wrapper button:hover {
+.btn-wrapper button:hover,
+.btn-wrapper2 a:hover,
+.btn-wrapper2 button:hover {
   background: black;
   color: white;
 }

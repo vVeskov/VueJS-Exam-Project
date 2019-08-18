@@ -8,7 +8,7 @@ import CreateGift from '@/components/gifts/CreateGift';
 import EditGift from '@/components/gifts/EditGift';
 import OrderGift from '@/components/gifts/OrderGift';
 import Cart from '@/components/gifts/Cart';
-import PendingGiftOrders from '@/components/gifts/pendingGiftOrders';
+import PendingGiftOrders from '@/components/gifts/PendingGiftOrders';
 
 
 Vue.use(Router)

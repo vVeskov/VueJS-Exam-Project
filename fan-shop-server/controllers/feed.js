@@ -133,6 +133,7 @@ module.exports = {
   },
 
   deleteSingleOrder: (req, res) => {
+    console.log(req);
     let id = req.body.id;
     PendingOrder.findByIdAndRemove({
       _id: id
@@ -144,6 +145,7 @@ module.exports = {
       console.log(err);
     })
   },
+
 
   deleteSingleGift: (req, res) => {
     let user = req.body.user;

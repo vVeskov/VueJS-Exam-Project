@@ -3,6 +3,9 @@ export const giftService = {
         return {
             gifts: [],
             details: [],
+            allData: [],
+            orders: [],
+            
         };
     },
     methods: {
@@ -46,9 +49,7 @@ export const giftService = {
                 giftQnt,
                 user
             }
-            return this.$http.post('feed/user/newOrder', dataToSend).then(({ data }) => {
-                console.log(data);
-            })
+            return this.$http.post('feed/user/newOrder', dataToSend)
         },
         getGiftByDetails(id) {
             return this.$http.get(`feed/gift/details/${id}`)
@@ -56,21 +57,45 @@ export const giftService = {
         getUserCartGifts() {
             return this.$http.get('feed/user/orders')
         },
-        removeGiftFromCart(user,giftName){
+        removeGiftFromCart(user, giftName) {
             let dataObj = {
                 user,
                 giftName
             }
-            return this.$http.post('feed/user/deleteSingleGift',dataObj)
+            return this.$http.post('feed/user/deleteSingleGift', dataObj)
         },
-        addPendingOrders(data){
-            return this.$http.post('feed/user/addPendingOrders',data)
+        addPendingOrders(data) {
+            return this.$http.post('feed/user/addPendingOrders', data)
         },
-        removeUserOrders(user){
+        removeUserOrders(user) {
             let dataToSend = {
                 user: user,
-              }
-            return this.$http.post('feed/user/delete',dataToSend).then(({data}) => console.log(data));
+            }
+            return this.$http.post('feed/user/delete', dataToSend)
+        },
+        getUsersOrders() {
+            return this.$http.get('feed/user/getPendingOrders').then(({ data }) => {
+                this.allData = data['orders'];
+                if (this.allData) {
+                    for (let i = 0; i < this.allData.length; i++) {
+                        for (let j = 0; j < this.allData[i].giftsName.length; j++) {
+
+                            let giftQnt = this.allData[i].giftsName[j].slice(-1);
+                            this.allData[i].giftsName[j] = this.allData[i].giftsName[j].substr(0, this.allData[i].giftsName[j].length - 1);
+                            this.allData[i].giftsName[j] = this.allData[i].giftsName[j] + " - " + "Quantity: " + giftQnt;
+                        }
+                    }
+                }
+                this.orders = this.allData;
+                
+            })
+        },
+        approveUserOrder(id){
+            
+                let data = {
+                    id:id
+                }
+                return this.$http.post('feed/user/deleteSingleOrder',data)
         }
 
     },

@@ -1,34 +1,53 @@
 <template>
   <div>
-    <section class="main-pending-orders">
+    <section class="main-pending-orders" v-for="order in orders" :key="order._id">
       <div class="pending-orders">
         <div class="pending-order-user">
-          <span>Username:</span>
-          <span class="single-username-and-sum">order.user</span>
+          <span>User: </span>
+          <span class="single-username-and-sum"> {{order.user}}</span>
         </div>
         <div class="pending-order-date">
           <span>Date order:</span>
-          <span>order.dateCreated</span>
+          <span>{{order.dateCreated}}</span>
         </div>
         <div class="pending-order-orders">
           <span>User orders:</span>
-          <div class="pending-orders-gifts">ord</div>
+          <div
+            v-for="(ord,index) in order.giftsName"
+            :key="index"
+            class="pending-orders-gifts"
+          >{{ord}}</div>
         </div>
         <div class="pending-order-sum">
           <span>Total sum:</span>
-          <span class="single-username-and-sum">order.totalSum USD</span>
+          <span class="single-username-and-sum">{{order.totalSum}} USD</span>
         </div>
         <button type="submit" class="checkout" @click="deleteUserOrder(order._id)">Checkout</button>
       </div>
     </section>
-    <div class="noCartPage">
+    <div class="noCartPage" v-if="!orders.length">
       <h2 class="noGifts">There are currently no pending orders!</h2>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { giftService } from "@/services/giftServices";
+
+export default {
+  data() {
+    return {};
+  },
+  mixins: [giftService],
+  created() {
+    this.getUsersOrders();
+  },
+  methods: {
+    deleteUserOrder(id) {
+      this.approveUserOrder(id).then(this.$router.go());
+    }
+  }
+};
 </script>
 
 <style scoped>
