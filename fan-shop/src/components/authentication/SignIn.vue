@@ -27,8 +27,7 @@ export default {
   data() {
     return {
       email: "",
-      password: "",
-      
+      password: ""
     };
   },
   validations: {
@@ -38,8 +37,7 @@ export default {
   mixins: [loginUser],
   methods: {
     signIn() {
-        this.login(this.email, this.password).then(user => {
-        
+      this.login(this.email, this.password).then(user => {
         this.$root.$emit("logged-in", user.authtoken);
         this.$root.$emit("isAdmin", user.username);
         this.$router.push("/");
@@ -49,5 +47,39 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.container {
+  margin-left: 3rem;
+  margin-top: 3rem;
+}
+
+.container .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.container .form-control {
+  max-width: 20%;
+}
+
+.container label {
+  margin-bottom: 0.5rem;
+}
+.form-group input {
+  font-size: 1rem;
+}
+.container .alert-dark {
+  margin-top: 0.25rem;
+  font-size: 1.2rem;
+  color: #f61900;
+}
+.btn-dark {
+  padding: 0.3rem 1rem;
+}
+
+.btn-dark:disabled {
+  cursor: not-allowed;
+}
 </style>

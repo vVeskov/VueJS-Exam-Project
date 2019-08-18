@@ -73,6 +73,7 @@ module.exports = {
 
   addNewOrderToUser: (req, res) => {
     const orderObj = req.body;
+
     Orders.create(orderObj)
       .then((order) => {
         res.status(200).json({
@@ -89,12 +90,11 @@ module.exports = {
   addPendingOrders: async (req, res) => {
     try {
       let data = req.body;
+      console.log(data);
       let findOrderByUser = await PendingOrder.find({
         user: data.user
       });
-      console.log(data);
       if (findOrderByUser.length < 1) {
-
         await PendingOrder.create({
           user: data.user,
           totalSum: data.totalSum,
@@ -133,23 +133,22 @@ module.exports = {
   },
 
   deleteSingleOrder: (req, res) => {
-
     let id = req.body.id;
-    
     PendingOrder.findByIdAndRemove({
       _id: id
     }).then(() => {
-        res.status(200).json({
-          message: 'You`ve deleted the choosen order mighty admin'
-        })
-      }).catch((err) => {
-        console.log(err);
+      res.status(200).json({
+        message: 'You`ve deleted the choosen order mighty admin'
       })
+    }).catch((err) => {
+      console.log(err);
+    })
   },
 
   deleteSingleGift: (req, res) => {
     let user = req.body.user;
     let giftName = req.body.giftName;
+
     Orders.deleteMany({
       user: user,
       giftName: { $in: [giftName] }
@@ -188,11 +187,11 @@ module.exports = {
   },
 
   editGift: (req, res) => {
-   
+
     let id = req.params.id;
     let query = { '_id': id };
     let newData = req.body.dataToSend;
-  
+
     Gift.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
       if (err) {
         console.log("An error occurred while updating document:")

@@ -15,7 +15,7 @@
             </template>
             <template v-else>
               <div class="btn-wrapper">
-                <a class="orderBtn1">Order</a>
+                <router-link :to="{name:'orderGift',params:{id:gift._id}}" class="orderBtn1">Order</router-link>
                 <router-link
                   :to="{name:'detailsGift',params: {id:gift._id}}"
                   class="orderBtn"

@@ -8,10 +8,7 @@
         </li>
         <template v-if="isAuthenticated && !isAdmin">
           <li>
-            <router-link to="/myOrders">My Orders</router-link>
-          </li>
-          <li>
-            <router-link to="/gift/cart">Cart</router-link>
+            <router-link to="/cart">Cart</router-link>
           </li>
         </template>
         <template v-if="!isAuthenticated">
@@ -27,7 +24,7 @@
             <router-link to="/create">Create Gift</router-link>
           </li>
           <li>
-            <router-link to="/gift/pending">Pending Orders</router-link>
+            <router-link to="/pending-orders">Pending Orders</router-link>
           </li>
         </template>
         <li v-if="isAuthenticated">

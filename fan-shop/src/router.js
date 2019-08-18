@@ -6,6 +6,10 @@ import SignUp from '@/components/authentication/SignUp';
 import DetailsGift from '@/components/gifts/DetailsGift';
 import CreateGift from '@/components/gifts/CreateGift';
 import EditGift from '@/components/gifts/EditGift';
+import OrderGift from '@/components/gifts/OrderGift';
+import Cart from '@/components/gifts/Cart';
+import PendingGiftOrders from '@/components/gifts/pendingGiftOrders';
+
 
 Vue.use(Router)
 
@@ -42,6 +46,21 @@ export default new Router({
       path: '/edit/:id',
       name: 'editGift',
       component: EditGift
+    },
+    {
+      path: '/order/:id',
+      name: 'orderGift',
+      component: OrderGift
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart
+    },
+    {
+      path: '/pending-orders',
+      name: 'pendingGiftOrders',
+      component: PendingGiftOrders
     },
   ]
 })

@@ -3,7 +3,6 @@ export const giftService = {
         return {
             gifts: [],
             details: [],
-            
         };
     },
     methods: {
@@ -35,11 +34,45 @@ export const giftService = {
                 dataToSend
             })
         },
-        deleteHomePageGift(id){
-            return this.$http.delete(`feed/gift/delete/${id}`).then()
-            
+        deleteHomePageGift(id) {
+            return this.$http.delete(`feed/gift/delete/${id}`)
+
+        },
+        addToUserCart(giftData, giftQnt) {
+            let user = localStorage.getItem('username');
+            let dataToSend = {
+                giftName: giftData.giftName,
+                price: giftData.price,
+                giftQnt,
+                user
+            }
+            return this.$http.post('feed/user/newOrder', dataToSend).then(({ data }) => {
+                console.log(data);
+            })
+        },
+        getGiftByDetails(id) {
+            return this.$http.get(`feed/gift/details/${id}`)
+        },
+        getUserCartGifts() {
+            return this.$http.get('feed/user/orders')
+        },
+        removeGiftFromCart(user,giftName){
+            let dataObj = {
+                user,
+                giftName
+            }
+            return this.$http.post('feed/user/deleteSingleGift',dataObj)
+        },
+        addPendingOrders(data){
+            return this.$http.post('feed/user/addPendingOrders',data)
+        },
+        removeUserOrders(user){
+            let dataToSend = {
+                user: user,
+              }
+            return this.$http.post('feed/user/delete',dataToSend).then(({data}) => console.log(data));
         }
 
     },
-    
+
 }

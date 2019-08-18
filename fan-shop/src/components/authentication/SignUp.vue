@@ -79,13 +79,47 @@ export default {
   },
   methods: {
     signUp() {
-      this.register(this.username,this.password,this.email).then(res => {
-        this.$router.push('/signin')
-      })
+      this.register(this.username, this.password, this.email).then(res => {
+        this.$router.push("/signin");
+      });
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.container {
+  margin-left: 3rem;
+  margin-top: 3rem;
+}
+
+.container .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.container .form-control {
+  max-width: 20%;
+}
+
+.container label {
+  margin-bottom: 0.5rem;
+}
+.form-group input {
+  font-size: 1rem;
+}
+.container .alert-dark {
+  margin-top: 0.25rem;
+  font-size: 1.2rem;
+  color: #f61900;
+}
+.btn-dark {
+  padding: 0.3rem 1rem;
+}
+
+.btn-dark:disabled {
+  cursor: not-allowed;
+}
 </style>
