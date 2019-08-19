@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="class-title">My Cart</h2>
-    <main v-for="gift in userGifts" :key="gift._id">
+    <main v-for="(gift,index) in userGifts" :key="gift._id">
       <div class="cart">
         <section class="table-head">
           <div class="gift-items">
@@ -18,7 +18,7 @@
           </div>
           <div class="user-cart">
             <button
-              @click="removeGift(gift.user,gift.giftName)"
+              @click="removeGift(gift.user,gift.giftName,index)"
               type="submit"
               class="deleteChoosenGift"
             >Remove gift</button>
@@ -60,9 +60,12 @@ export default {
       totalSum: 0
     };
   },
+
   methods: {
-    removeGift(user, giftName) {
-      this.removeGiftFromCart(user, giftName).then(this.$router.go());
+    removeGift(user, giftName,index) {
+      this.removeGiftFromCart(user, giftName).then(
+        this.userGifts.splice(index,1)
+      );
     },
     removeUserCartAndAddPendingOrders(userGifts, totalSum) {
       console.log(userGifts, totalSum);

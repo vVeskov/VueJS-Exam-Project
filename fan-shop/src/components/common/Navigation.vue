@@ -28,7 +28,7 @@
           </li>
         </template>
         <li v-if="isAuthenticated">
-          <button @click="logoutUser()">Logout</button>
+          <a  class="logoutBtn" @click="logoutUser()">Logout</a>
         </li>
       </ul>
     </nav>
@@ -81,4 +81,10 @@ header nav ul a:hover {
   color: #dd0031;
   border-bottom: 1px solid #dd0031;
 }
+/* .logoutBtn{
+  color:white;
+  background:#1E1E1E;
+  border:none;
+  font-size: 1.2rem;
+} */
 </style>
