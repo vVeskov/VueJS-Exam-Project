@@ -10,10 +10,8 @@ import OrderGift from '@/components/gifts/OrderGift';
 import Cart from '@/components/gifts/Cart';
 import PendingGiftOrders from '@/components/gifts/PendingGiftOrders';
 
-
 Vue.use(Router)
-
-export default new Router({
+  const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -62,5 +60,33 @@ export default new Router({
       name: 'pendingGiftOrders',
       component: PendingGiftOrders
     },
-  ]
+  ],
 })
+
+router.beforeEach((to,from,next) => {
+  let user = localStorage.getItem("username");
+  let isAdmin = false;
+  if(user == 'Admin'){
+    isAdmin = true;
+  }
+  let path = to.fullPath;
+  if(path.startsWith('/order/') && user == null){
+    next('signin')
+  }
+  if(path.startsWith('/cart') && user == null){
+    next('signin')
+  }
+  if(path.startsWith('/create') && !isAdmin){
+    next('signin')
+  }
+  if(path.startsWith('/edit/') && !isAdmin){
+    next('signin')
+  }
+  if(path.startsWith('/pending-orders') && !isAdmin){
+    next('signin')
+  }
+  
+  next();
+  // if(path.startsWith(
+})
+export default router;

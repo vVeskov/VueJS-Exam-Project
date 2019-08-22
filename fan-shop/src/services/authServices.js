@@ -8,7 +8,9 @@ export const authService = {
     data(){
         return{
             authToken: localStorage.getItem('authtoken'),
-            username: localStorage.getItem('username')
+            username: localStorage.getItem('username'),
+            message:"",
+
         }
     },
     computed: {
@@ -17,7 +19,7 @@ export const authService = {
             return a;
         },
         isAdmin() {
-            // let userIsAdmin = localStorage.getItem('username');
+           
             let userIsAdmin = this.username;
             if (userIsAdmin == "Admin") {
                 return true;
@@ -57,6 +59,7 @@ export const loginUser = {
                 username: data.user.name,
                 authtoken: data.token
             }))
+           
         }
     }
 }

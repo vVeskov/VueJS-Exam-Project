@@ -2,7 +2,7 @@
   <main>
     <h1 v-if="username">Hello {{username}}, welcome to our Fan Shop !</h1>
     <section>
-      <div class="single-gift" v-for="gift in gifts" :key="gift._id">
+      <div class="single-gift" v-for="(gift,index) in gifts" :key="gift._id">
         <img :src="gift.imageUrl" alt="giftImage" />
 
         <span class="gift-name">{{gift.giftName}}</span>
@@ -11,7 +11,7 @@
           <div class="btn-wrapper">
             <template v-if="isAdmin">
               <router-link :to="{name:'editGift',params:{id:gift._id}}" class="editButton">Edit</router-link>
-              <button @click="deleteGift(gift._id)" class="deleteButton" type="submit">Delete</button>
+              <button @click="deleteGift(gift._id,index)" class="deleteButton" type="submit">Delete</button>
             </template>
             <template v-else>
               <div class="btn-wrapper2">
@@ -35,21 +35,25 @@ import { giftService } from "@/services/giftServices";
 export default {
   data() {
     return {
-      username: ""
+      username: "",
+      gifts:[],
     };
   },
   mixins: [giftService],
   created() {
-    this.getAllGifts();
+    this.getAllGifts().then(res => console.log(res));
+
     let user = localStorage.getItem("username");
     if (user !== null) {
       this.username = user;
     }
   },
   methods: {
-    deleteGift(id) {
-      this.deleteHomePageGift(id);
-      this.$router.go();
+    deleteGift(id,index) {
+      this.deleteHomePageGift(id).then(
+        this.gifts.splice(index,1)
+      );
+
     }
   }
 };

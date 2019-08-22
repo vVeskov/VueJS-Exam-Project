@@ -14,8 +14,15 @@ import { giftService } from "@/services/giftServices";
 
 export default {
   mixins: [giftService],
+  data(){
+    return{
+      details:[],
+    }
+  },
   created(){
-    this.getDetailsGift(this.$route.params.id);
+    this.getDetailsGift(this.$route.params.id).then(({data})=>{
+      this.details = data.gift;
+    });
   }
 };
 </script>

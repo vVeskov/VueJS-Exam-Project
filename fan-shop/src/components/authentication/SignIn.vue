@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h1>Sign In</h1>
-    {{$v}}
     <form @submit.prevent="signIn">
       <div class="form-group">
         <label for="email">Email</label>
@@ -16,6 +15,8 @@
         <div v-if="$v.password.$error">Password must be between 5 and 20 characters!</div>
       </div>
       <button :disabled="$v.$error || !$v.$dirty" type="submit" class="btn-dark">Sign In</button>
+        <div class="alert alert-dark" v-if="message.length > 0">{{message}}</div>
+
     </form>
   </div>
 </template>
@@ -39,6 +40,7 @@ export default {
   methods: {
     signIn() {
       this.login(this.email, this.password).then(user => {
+        if(this.email !== "" && this.password !== "")
         this.$root.$emit("logged-in", user.authtoken);
         this.$root.$emit("isAdmin", user.username);
         this.$router.push("/");

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+
+
 export default {
     install(Vue, options) {
         Vue.prototype.$http = axios.create({
@@ -8,6 +10,8 @@ export default {
                 "Content-Type": "application/json"
             }
         })
+       
     }
+    
 }
 

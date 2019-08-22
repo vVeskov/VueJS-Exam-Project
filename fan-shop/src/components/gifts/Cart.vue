@@ -14,11 +14,11 @@
           </div>
           <div class="gift-items">
             <span>Price:</span>
-            <span class="order-price">{{gift.price}}</span>
+            <span class="order-price">{{gift.price}} USD</span>
           </div>
           <div class="user-cart">
             <button
-              @click="removeGift(gift.user,gift.giftName,index)"
+              @click="removeGift(gift.user,gift.giftName,index,gift.price)"
               type="submit"
               class="deleteChoosenGift"
             >Remove gift</button>
@@ -60,12 +60,13 @@ export default {
       totalSum: 0
     };
   },
-
   methods: {
-    removeGift(user, giftName,index) {
+    removeGift(user, giftName,index,giftPrice) { 
+      
       this.removeGiftFromCart(user, giftName).then(
         this.userGifts.splice(index,1)
-      );
+       
+      ).then(this.totalSum-=giftPrice);
     },
     removeUserCartAndAddPendingOrders(userGifts, totalSum) {
       console.log(userGifts, totalSum);
@@ -98,6 +99,7 @@ export default {
         }
       });
       this.userGifts = currentUserOrders;
+      console.log(this.userGifts);
       let currSum = [];
       let allSum = 0;
       let giftQnt = [];
@@ -106,27 +108,28 @@ export default {
       currentUserOrders.forEach(order => {
         giftQnt.push(order.giftQnt);
       });
-
       currentUserOrders.forEach(order => {
         currSum.push(order.price);
       });
-
+      
       currSum.forEach(sum => {
         sum = sum.slice(0, -3);
         sum = Number(sum);
         singleSum.push(sum);
       });
+      for(let i = 0;i< this.userGifts.length;i++){
+        this.userGifts[i].price = singleSum[i];
+        this.userGifts[i].price *= this.userGifts[i].giftQnt; 
+      }
       for (let index = 0; index < singleSum.length; index++) {
         let s = singleSum[index] * giftQnt[index];
         giftTimeQntSum.push(s);
         allSum += s;
       }
       this.totalSum = allSum;
-
       for (let i = 0; i < this.gifts.length; i++) {
         this.gifts[i]["price"] = giftTimeQntSum[i];
       }
-
       if (this.gifts.length !== 0) {
         this.hasGifts = true;
       } else {
@@ -146,7 +149,6 @@ export default {
   display: flex;
   flex-direction: column;
 }
-
 main {
   padding: 0rem 0 0 4rem;
 }

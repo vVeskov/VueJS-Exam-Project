@@ -24,7 +24,6 @@ export const giftService = {
             //     })
         },
         create(giftName, description, imageUrl, price) {
-
             return this.$http.post("feed/gift/create", {
                 giftName, description, imageUrl, price
             }
