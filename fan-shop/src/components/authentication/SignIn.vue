@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>Sign In</h1>
+    {{$v}}
     <form @submit.prevent="signIn">
       <div class="form-group">
         <label for="email">Email</label>

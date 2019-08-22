@@ -17,10 +17,11 @@ export const giftService = {
                 })
         },
         getDetailsGift(id) {
-            return this.$http.get(`feed/gift/details/${id}`).
-                then(({ data }) => {
-                    this.details = data.gift;
-                })
+            return this.$http.get(`feed/gift/details/${id}`)
+            // .
+            //     then(({ data }) => {
+            //         this.details = data.gift;
+            //     })
         },
         create(giftName, description, imageUrl, price) {
 

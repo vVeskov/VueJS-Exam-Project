@@ -1,35 +1,22 @@
 <template>
   <div class="edit-gift">
     <h1>Edit Gift</h1>
-    <form @submit.prevent="editGift">
-      <span>Gift name</span>
-      <input
-        v-model="$v.giftName.$model"
-        type="text"
-        :placeholder="details.description"
-        id="giftName"
-      />
+    <template v-if="details">
+      <form @submit.prevent="editGift">
+        <span>Gift name</span>
+        <input v-model="giftName" @input="$v.giftName.$touch()" type="text" name="giftName" />
 
-      <span>Description</span>
-      <input
-        v-model="$v.description.$model"
-        :placeholder="details.description"
-        type="text"
-        name="description"
-      />
+        <span>Description</span>
+        <input v-model="description" type="text" name="description" />
 
-      <span>Image Url</span>
-      <input
-        v-model="$v.imageUrl.$model"
-        :placeholder="details.imageUrl"
-        type="text"
-        name="imageUrl"
-      />
+        <span>Image Url</span>
+        <input v-model="imageUrl" type="text" name="imageUrl" />
 
-      <span>Price</span>
-      <input v-model="$v.price.$model" :placeholder="details.price" type="text" name="price" />
-      <button type="submit">Edit gift</button>
-    </form>
+        <span>Price</span>
+        <input v-model="price" type="text" name="price" />
+        <button  type="submit">Edit gift</button>
+      </form>
+    </template>
   </div>
 </template>
 
@@ -43,9 +30,12 @@ export default {
       giftName: "",
       description: "",
       imageUrl: "",
-      price: ""
+      price: "",
+      editedForm: false,
+      gift: {}
     };
   },
+  
   mixins: [giftService],
   validations: {
     giftName: { required },
@@ -54,8 +44,12 @@ export default {
     price: { required }
   },
   created() {
-    this.getDetailsGift(this.$route.params.id)
-    
+    this.getDetailsGift(this.$route.params.id).then(({ data }) => {
+      this.giftName = data.gift.giftName;
+      this.imageUrl = data.gift.imageUrl;
+      this.price = data.gift.price;
+      this.description = data.gift.description;
+    });
   },
   methods: {
     editGift() {
@@ -66,7 +60,7 @@ export default {
         this.price,
         this.$route.params.id
       ).then(res => {
-          this.$router.push('/');
+        this.$router.push("/");
       });
     }
   }
