@@ -35,11 +35,18 @@ Fan shop is an application where you can buy sports gifts for your family and fr
 
 ### Features
 ```
-Anonymus user: Can view all items and details about each item.He can also register/login in to the app
+Anonymus user:
+Can view all items and details about each item.
+He can also register/login in to the app.
 ```
 ```
 Authenticated user: Can see any item from home gift section and details about it.
 Add gifts to the cart and purchase the selected gifts.
+```
+```
+Admin user: 
+Can edit current gift and also create brand new one.
+He can also delete any gift and approve pending user orders.
 ```
 
 
