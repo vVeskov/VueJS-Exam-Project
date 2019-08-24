@@ -1,4 +1,4 @@
-# fan-shop
+# Vue-Js-fan-shop
 
 ## Project setup
 ```
