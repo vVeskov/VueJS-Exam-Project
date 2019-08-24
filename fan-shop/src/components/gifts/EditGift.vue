@@ -14,7 +14,7 @@
 
         <span>Price</span>
         <input v-model="price" type="text" name="price" />
-        <button  type="submit">Edit gift</button>
+        <button type="submit">Edit gift</button>
       </form>
     </template>
   </div>

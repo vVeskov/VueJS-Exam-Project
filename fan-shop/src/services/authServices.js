@@ -5,44 +5,46 @@ const login = user => {
 }
 
 export const authService = {
-    data(){
-        return{
+    data() {
+        return {
             authToken: localStorage.getItem('authtoken'),
             username: localStorage.getItem('username'),
-            message:"",
-
+            
         }
     },
     computed: {
         isAuthenticated() {
             let a = this.authToken !== null;
+            console.log(a);
             return a;
         },
         isAdmin() {
-           
             let userIsAdmin = this.username;
             if (userIsAdmin == "Admin") {
                 return true;
             }
             return false;
         },
+       
     },
     created() {
-        this.$root.$on('logged-in', authtoken => this.authToken = authtoken );
-        this.$root.$on('isAdmin', username => this.username = username );
+        this.$root.$on('logged-in', authtoken => this.authToken = authtoken);
+        this.$root.$on('isAdmin', username => this.username = username);
     }
 }
 
 export const registerUser = {
     methods: {
         register(name, password, email) {
+            
             return this.$http.post(
                 "/auth/register", {
                     name,
                     password,
                     email
                 })
-                .then(res => console.log(res));
+                .then(res => console.log(res))
+                
         }
     }
 }
@@ -55,11 +57,13 @@ export const loginUser = {
                     email,
                     password
                 }
-            ).then(({data}) => login({    
-                username: data.user.name,
-                authtoken: data.token
-            }))
-           
+            ).then(({ data }) =>
+                login({
+                    username: data.user.name,
+                    authtoken: data.token
+                })
+            )
+            
         }
     }
 }

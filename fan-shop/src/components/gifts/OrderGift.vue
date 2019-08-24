@@ -47,7 +47,6 @@ export default {
   },
   methods: {
     addToCart() {
-      console.log(this.gifts);
       this.isActive = true;  
       let data = {};
       data['price'] = this.gifts.price;

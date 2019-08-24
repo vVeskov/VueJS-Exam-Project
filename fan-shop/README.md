@@ -27,3 +27,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Idea 
+```
+Fan shop is an application where you can buy sports gifts for your family and friends
+```

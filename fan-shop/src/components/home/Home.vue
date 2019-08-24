@@ -41,7 +41,7 @@ export default {
   },
   mixins: [giftService],
   created() {
-    this.getAllGifts().then(res => console.log(res));
+    this.getAllGifts();
 
     let user = localStorage.getItem("username");
     if (user !== null) {
@@ -53,7 +53,6 @@ export default {
       this.deleteHomePageGift(id).then(
         this.gifts.splice(index,1)
       );
-
     }
   }
 };

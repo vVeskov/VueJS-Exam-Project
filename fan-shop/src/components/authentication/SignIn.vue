@@ -15,7 +15,7 @@
         <div v-if="$v.password.$error">Password must be between 5 and 20 characters!</div>
       </div>
       <button :disabled="$v.$error || !$v.$dirty" type="submit" class="btn-dark">Sign In</button>
-        <div class="alert alert-dark" v-if="message.length > 0">{{message}}</div>
+        <div class="alert alert-dark" v-if="errorStatus.length > 0">Invalid email or password !!!</div>
 
     </form>
   </div>
@@ -24,12 +24,13 @@
 <script>
 import { required, email, minLength } from "vuelidate/lib/validators";
 import { loginUser } from "@/services/authServices";
-
+import errorMessage from "@/services/authServices";
 export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      errorStatus:[],
     };
   },
   validations: {
@@ -40,13 +41,13 @@ export default {
   methods: {
     signIn() {
       this.login(this.email, this.password).then(user => {
-        if(this.email !== "" && this.password !== "")
         this.$root.$emit("logged-in", user.authtoken);
         this.$root.$emit("isAdmin", user.username);
         this.$router.push("/");
-      });
+      }).catch(err => this.errorStatus.push(err));
     }
-  }
+  },
+  
 };
 </script>
 

@@ -11,6 +11,7 @@
             <router-link to="/cart">Cart</router-link>
           </li>
         </template>
+
         <template v-if="!isAuthenticated">
           <li>
             <router-link to="/signin">Sign In</router-link>

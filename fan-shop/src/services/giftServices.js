@@ -74,24 +74,10 @@ export const giftService = {
             return this.$http.post('feed/user/delete', dataToSend)
         },
         getUsersOrders() {
-            return this.$http.get('feed/user/getPendingOrders').then(({ data }) => {
-                this.allData = data['orders'];
-                if (this.allData) {
-                    for (let i = 0; i < this.allData.length; i++) {
-                        for (let j = 0; j < this.allData[i].giftsName.length; j++) {
-
-                            let giftQnt = this.allData[i].giftsName[j].slice(-1);
-                            this.allData[i].giftsName[j] = this.allData[i].giftsName[j].substr(0, this.allData[i].giftsName[j].length - 1);
-                            this.allData[i].giftsName[j] = this.allData[i].giftsName[j] + " - " + "Quantity: " + giftQnt;
-                        }
-                    }
-                }
-                this.orders = this.allData;
-                
-            })
+            return this.$http.get('feed/user/getPendingOrders')
+            
         },
         approveUserOrder(id){
-            
                 let data = {
                     id:id
                 }
