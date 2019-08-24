@@ -32,3 +32,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ```
 Fan shop is an application where you can buy sports gifts for your family and friends
 ```
+
+### Features
+```
+Anonymus user: Can view all items and details about each item.He can also register/login in to the app
+```
+```
+Authenticated user: Can see any item from home gift section and details about it.
+Add gifts to the cart and purchase the selected gifts.
+```
+
+
