@@ -48,9 +48,6 @@
   </div>
 </template>
 
- 
-</template>
-
 <script>
 import { giftService } from "@/services/giftServices";
 export default {
@@ -69,7 +66,6 @@ export default {
       ).then(this.totalSum-=giftPrice);
     },
     removeUserCartAndAddPendingOrders(userGifts, totalSum) {
-      console.log(userGifts, totalSum);
       let dataToSend = {};
       let giftsArr = [];
       userGifts.forEach(order => {
@@ -99,7 +95,6 @@ export default {
         }
       });
       this.userGifts = currentUserOrders;
-      console.log(this.userGifts);
       let currSum = [];
       let allSum = 0;
       let giftQnt = [];
@@ -144,6 +139,7 @@ export default {
 .user-sum,
 .cart-buttons {
   padding-left: 4rem;
+  margin-bottom: 5rem;
 }
 .cart {
   display: flex;

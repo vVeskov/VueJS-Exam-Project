@@ -8,15 +8,13 @@ export const authService = {
     data() {
         return {
             authToken: localStorage.getItem('authtoken'),
-            username: localStorage.getItem('username'),
-            
+            username: localStorage.getItem('username'),  
         }
     },
     computed: {
         isAuthenticated() {
-            let a = this.authToken !== null;
-            console.log(a);
-            return a;
+            let token = this.authToken !== null;
+            return token;
         },
         isAdmin() {
             let userIsAdmin = this.username;
@@ -25,7 +23,6 @@ export const authService = {
             }
             return false;
         },
-       
     },
     created() {
         this.$root.$on('logged-in', authtoken => this.authToken = authtoken);
@@ -36,7 +33,6 @@ export const authService = {
 export const registerUser = {
     methods: {
         register(name, password, email) {
-            
             return this.$http.post(
                 "/auth/register", {
                     name,
@@ -62,8 +58,7 @@ export const loginUser = {
                     username: data.user.name,
                     authtoken: data.token
                 })
-            )
-            
+            )   
         }
     }
 }

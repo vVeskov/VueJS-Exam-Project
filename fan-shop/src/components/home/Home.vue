@@ -68,7 +68,7 @@ main section {
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
+  margin-bottom: 7rem;
 }
 
 main section .single-gift {

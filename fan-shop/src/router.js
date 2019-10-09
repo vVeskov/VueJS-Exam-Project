@@ -87,6 +87,6 @@ router.beforeEach((to,from,next) => {
   }
   
   next();
-  // if(path.startsWith(
+  
 })
 export default router;

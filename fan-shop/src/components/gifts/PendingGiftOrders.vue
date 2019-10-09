@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-wrapper">
     <section class="main-pending-orders" v-for="(order,index) in orders" :key="order._id">
       <div class="pending-orders">
         <div class="pending-order-user">
@@ -30,6 +30,7 @@
       <h2 class="noGifts">There are currently no pending orders!</h2>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -73,8 +74,11 @@ export default {
 </script>
 
 <style scoped>
+.main-wrapper{
+  padding-bottom: 5rem;
+}
 .main-pending-orders {
-  padding: 4rem 0 0 5rem;
+  padding: 2rem 0 0 5rem;
 }
 section div {
   margin-bottom: 1rem;

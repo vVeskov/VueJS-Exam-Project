@@ -5,13 +5,10 @@
       <form @submit.prevent="editGift">
         <span>Gift name</span>
         <input v-model="giftName" @input="$v.giftName.$touch()" type="text" name="giftName" />
-
         <span>Description</span>
         <input v-model="description" type="text" name="description" />
-
         <span>Image Url</span>
         <input v-model="imageUrl" type="text" name="imageUrl" />
-
         <span>Price</span>
         <input v-model="price" type="text" name="price" />
         <button type="submit">Edit gift</button>
@@ -80,7 +77,6 @@ button {
 .edit-gift {
   margin: 1rem 0 0 3rem;
 }
-
 .edit-gift form {
   display: flex;
   flex-direction: column;

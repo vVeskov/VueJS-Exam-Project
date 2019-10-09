@@ -8,7 +8,6 @@
           type="text"
           v-model="$v.username.$model"
           class="form-control"
-          id="username"
           placeholder="Please enter your name"
         />
         <div class="alert alert-dark" v-if="!$v.username.required">Please provide your name!</div>
@@ -20,7 +19,6 @@
           v-model="$v.email.$model"
           type="email"
           class="form-control"
-          id="email"
           name="email"
           placeholder="Please enter your email adress"
         />
@@ -35,7 +33,6 @@
           v-model="$v.password.$model"
           type="password"
           class="form-control"
-          id="password"
           placeholder="Please enter your password"
         />
         <div v-if="!$v.password.required" class="alert alert-dark">Please provide a password</div>

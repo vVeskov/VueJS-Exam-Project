@@ -12,7 +12,7 @@
         <label for="password">Password</label>
         <input type="password" v-model="$v.password.$model" class="form-control" name="password" />
         <div v-if="!$v.password.required" class="alert alert-dark">Please provide a password</div>
-        <div v-if="$v.password.$error">Password must be between 5 and 20 characters!</div>
+        <div v-if="$v.password.$error" class="alert alert-dark">Password must be between 5 and 20 characters!</div>
       </div>
       <button :disabled="$v.$error || !$v.$dirty" type="submit" class="btn-dark">Sign In</button>
         <div class="alert alert-dark" v-if="errorStatus.length > 0">Invalid email or password !!!</div>

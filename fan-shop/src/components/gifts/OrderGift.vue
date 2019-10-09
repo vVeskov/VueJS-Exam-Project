@@ -41,7 +41,6 @@ export default {
   mixins: [giftService],
   created() {
     this.getGiftByDetails(this.$route.params.id).then(({ data }) => {
-      console.log(data);
       this.gifts = data.gift;
     });
   },
